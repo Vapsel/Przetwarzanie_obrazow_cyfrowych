@@ -235,7 +235,7 @@ Ponieważ w maskach filtrów górnoprzepustowych są ujemne współczynniki wag,
 Bierze pod uwagę środkową wartość (medianę) uporządkowanych pikseli z otoczenia rozważanego piksela. Ekstremalne wartości nie wpływają na jego działanie. Bardzo skutecznie zwalcza szumy, nie powodując ich rozmazywania na większym obszarze. Nie wprowadza do obrazu nowych wartości, więc obraz po filtracji nie wymaga skalowania. Nie powoduje pogorszenia ostrości krawędzi, ale ma tendencję do zjadania narożników.
 
 \subsection{Czy filtr medianowy z oknem 5x5 całkowicie odfiltruje zakłócenia o (ciemne zakłócenie na jasnym tle) dla zakłócenia o rozmiarze: 2x4, 3x5, 6x5, 2x14?}
-Będą odfiltrowane zakłócenia tylko o rozmiarach 2x4 i 3x5, bo zakłócenia o rozmiarach 6x5 i 2x14 nie mieszczą się w oknie filtra.
+Będą odfiltrowane zakłócenia tylko o rozmiarach 2x4 i 2x14, bo brana jest media ze wszystkich punktów otoczenia. Ilość punktów zakłócenia w oknie ma być mniejsza niż $\frac{5\times5}{2}\approx12$.
 
 \subsection{Za pomocą, których masek można otrzymać filtr kombinowany \\ Jakie gradienty można zastosować w filtrach kombinowanych \\ Jakie filtry mogą być kombinowane}
 Za pomocą dwóch prostopadłych (w różnych kierunkach) masek Sobela (Prewitta, Robertsa) i kombinacji Euklidesowej lub modułowej. Nazywane: "gradient Sobela", "gradient Prewitta", "gradient Robertsa" "gradient Kirscha" (nie był omawiany ale istnieje). \\
@@ -316,9 +316,87 @@ Racej górnoprzepustowa skoro są same krawędzie.
 \subsection{Różnice pomiędzy filtracją bilateralną a non local means}
 Filtracja bilateralna polega na tym, że wartość piksela zastępuje się bardzo specjalną średnią z pikseli otoczenia analizowanego piksela. Nie jest to zwykła średnia arytmetyczna, lecz średnia ważona, w której wagami są zarówno odległość piksela otoczenia od badanego piksela, ale także różnica w cechach radiometrycznych np. intensywności. W efekcie tego zachowane są ostre krawędzie. 
 Filtracja non-local means robi tak samo ale uśrednianie obejmuje wszystkie piksele w obrazie. 
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak\section{Przekształcenia morfologiczne}
+
+\subsection{Jako jaki filtr można traktować dylatację}
+Filtr maksymalny.
+
+\subsection{Jako jaki filtr można traktować erozję}
+Filtr minimalny.
+
+\subsection{Ustaw w ciąg rosnący wg. wielkości pól: figurę wejściową f oraz figury otrzymane po podstawowych przekształceniach morfologicznych dylatacji D(f), erozji E(f), zamknięcia Z(f) i otwarcia O(f)}
+E(f) < O(F) < f < Z(f) < D(f)
+
+\subsection{Co wykryje Bottom-Hat}
+Minima lokalne obrazu
+
+\subsection{Co wykryje Top-Hat}
+Maksima lokalne obrazu
+
+\subsection{Jak wykorzystać operacje otwarcia/zamknięcia do wyszukiwania lokalnych ekstremów}
+Maksima: Otwarcie - oryginał, binaryzacja z dolnym progiem
+Minima: Zamknięcie - oryginał, binaryzacja z dolnym progiem
+
+\subsection{Ścienianie definicja + przykład}
+Ścienianie obiektu X przy użyciu el. strukturalnego B polega na przyłożeniu tego elementu do każdego punktu obrazu tak, aby punkt centralny pokrywał się z tym punktem i albo nie zmieniać wartości punktu jeśli element nie pokrywa się z jego sąsiedztwem albo zmienić wartość na \textbf{0} jeśli się pokrywa.
+
+\subsection{Co to jest operacja pogrubiania. Podaj przykład}
+Ścienianie obiektu X przy użyciu el. strukturalnego B polega na przyłożeniu tego elementu do każdego punktu obrazu tak, aby punkt centralny pokrywał się z tym punktem i albo nie zmieniać wartości punktu jeśli element nie pokrywa się z jego sąsiedztwem albo zmienić wartość na \textbf{1} jeśli się pokrywa. \\
+Przykład: ???
+
+\subsection{Wypisać etapy wypełniania dziur}
+\begin{enumerate}[noitemsep]
+	\item Wyznaczenie negatywu z obrazu wyjściowego
+	\item Wyczyszczenie brzegu negatywu(w wyniku tego pozostają na obrazie same otwory)
+	\item Wyznaczenie operacji $OR$ obrazu wyjściowego i wyniku z punktu 2
+\end{enumerate}
+Przykład: \\
+\begin{center}
+	\includegraphics[scale=1]{wypelniania_dziur.png}
+\end{center}
+
+\subsection{Która maska to szkieletyzacja}
+Szkieletyzacja może być realizowana jako ścienanie z elementem strukturalnym: 
+\begin{tabular}{|c|c|c|}
+	\hline
+	x & 0 & x \\ \hline
+	x & 1 & x \\ \hline
+	1 & 1 & 1 \\ \hline
+\end{tabular} 
+\begin{description}[noitemsep]
+	\item[0] piksel o szarości mniejszej od tła
+	\item[1] piksel o szarości większej od tła
+	\item[x] piksel o dowolnej szarości
+\end{description}
+
+\subsection{Opisać operację czyszczenie brzegu}
+Ma na celu usunięcie z obrazu wszystkich obszarów, które przecinają brzeg obrazu. Przydaje się jak chcemy dokonać jakiejś operacji wyłącznie na w pełni widocznych obiektach. \par
+Algorytm:
+\begin{enumerate}[noitemsep]
+	\item Tworzenie markerów (wspólnej części obrazu i jego brzegu)
+	\item Rekonstrukcja obiektów przeciętych przez brzeg obrazu
+	\item Generacja różnicy obrazu wejściowego i obrazu z obiektami po rekonstrukcji
+\end{enumerate}
+
+\subsection{Opisać rekonstrukcję}
+Cykliczna dylatacja obrazu i wyznaczanie części wspólnej (operacja $AND$)z obrazu po dylatacji oraz wyjściowego całego przekształcenia - usuwa się fragmenty, które “wyszły” poza figurę.
+
+\subsection{Wyznaczanie centroidów jest wykonywane za pomocą operacji}
+Ścienianie przy użyciu dwóch elementów strukturalnych:
+\begin{tabular}{|c|c|c|}
+	\hline
+	0 & x & x \\ \hline
+	0 & 1 & 1 \\ \hline
+	0 & 0 & x \\ \hline
+\end{tabular} 
+\begin{tabular}{|c|c|c|}
+	\hline
+	x & 0 & x \\ \hline
+	0 & 1 & 1 \\ \hline
+	x & 0 & x \\ \hline
+\end{tabular} 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \end{document}
