@@ -398,5 +398,119 @@ Cykliczna dylatacja obrazu i wyznaczanie części wspólnej (operacja $AND$)z ob
 \end{tabular} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak\section{Transformacja Houga}
+\subsection{Jakie niepożądane efekty powstają w przekształceniu Hougha do przestrzeni A,B? Jak temu zapobiec?} ???
+Jeżeli linia jest pionowa, to wspolczynnik $a$ dochodzi do nieskończoności, co bardzo utrudnia obliczenia.
 
+%\section{Były podane dwa punkty o współrzędnych (0,0)(0,0) i (1,1)(1,1). Podaj wzór na prostą i narysuj ich interpelację w przestrzeni Hougha.}Najczęściej wykorzystywanymi parametrami są współczynniki $\sigma$, $\theta$ opisujące równanie prostej w postaci normalnej:$$ \sigma=x\cdot \cos(\theta)+y\cdot \sin(\theta) $$gdzie: $\sigma$ - promień wodzący, $\theta$ - kąt tworzony przez $\sigma$ z osią OX.
+
+\subsection{Transformata Hougha dla dwóch pikseli}
+???
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak\section{Segmentacja}
+
+\subsection{Etapy segmentacji (przez podział)}
+\begin{enumerate}[noitemsep]
+	\item Ustalenie testu jednolitości
+	\item Podzielenie obrazu na obszary o takich samych rozmiarach
+	\item Zastosować test dla każdego regionu
+	\item Jeśli obszar jest jednolity, to należy zlepić go z sąsiadami
+	\item Jeśli nie spełnia, to ponownie podzielić
+	\item Proces kontynuować aż wszystkie obszary zdadzą test
+\end{enumerate}
+
+
+\subsection{Segmentacja przez podział obszaru - co to jest i podać 2 problemy jakie przy niej występują.}
+Dzieli się stopniowo obszary na mniejsze dopóki wszystkie ich piksele mają własności znacznie różniące się od tych w innych obszarach.  \\
+Problemy:
+\begin{enumerate}[noitemsep]
+	\item Wybór progu jednolitości
+	\item Powstawanie fałszywych obiektów (izolowane punkty o wartości 1 gdy dookoła są wyłącznie punkty tła)
+\end{enumerate}
+
+\subsection{Segmentacja przez rozrost}
+Szuka się grup elementów o zbliżonej własności, zaczynamy od jednego elementu i sprawdzamy, czy są podobne, jeśli tak, to je grupujemy razem.
+
+\subsection{Segmentacja metodą wykrywania krawędzi}
+Szukamy granic pomiędzy obszarami, które niebezpośrednio definiują obiekt. Najpierw znajdujemy piksele, które mogą należeć do krawędzi, a potem zlepiamy je do pojedynczych segmentów linii, które z kolei też są łączone i tworzą granice obiektu. Używa się gradientów Sobela, Prewitta itd.
+
+\subsection{Segmentacja oparta na statystyce}
+Stosujemy kiedy segmenty są wypełnione jakimś stałym wzorcem (teksturą), pojedyncze obszary znacznie różniące się od siebie stanowią jeden obszar.
+
+\subsection{Dlaczego cienie stanowią problem dla metody segmentacji z generacją tła}
+Cienie spełniają wszystkie warunki, aby być kwalifikowane jako obiekty pierwszego planu, ale z punktu widzenia analizy obrazów można go uznać za zakłócenie, więc utrudnia analizę.
+
+\subsection{Czy segmentacja obiektów pierwszoplanowych to segmentacja obiektów ruchomych. Uzasadnić}
+Nie, obiekty pierwszoplanowe, to te które są dla nas interesujące, może to być np. człowiek, który cały czas leży. Jednocześnie może być wiele obiektów ruchomych, które są tłem(np. powiewające gałęzie drzewa).
+
+\subsection{Dlaczego model statycznego tła nie sprawdza się w metodzie segmentacji z generacją tła?}???
+
+
+\subsection{Czy metoda aktywnego konturu będzie działać dla pisma ze starodruku.}
+Nie, ponieważ nie poradzi sobie z “wewnętrznymi dziurami” w literach.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak\section{Indeksacja}
+
+\subsection{Indeksacja jednoprzebiegowa - napisać po co i gdzie się stosuje}
+Można zaoszczędzić czas obliczeń, szczególnie dla obrazów z niewielką liczbą obiektów oddalonych od siebie, znajduje zastosowanie w potokowym przetwarzaniu strumienia wizyjnego za pomocą układu FPGA.
+
+\subsection{Opisz drugą iterację w drugim przebiegu indeksacji}
+Algorytm:
+\begin{enumerate}[noitemsep]
+	\item Przeglądanie zbinaryzowanego obrazu linia po linii aż do napotkania punktu o wartości 1, wtedy nadaje mu się etykietę, analizując jego otoczenie i zapisując w tablicy sklejeń. 
+	\item W drugiej iteracji tablica sklejeń może w prosty sposób zostać użyta do przeindeksowania źle zaindeksowanych części obiektów, można ją użyć jako podstawę do operacji LUT.
+\end{enumerate}
+
+- Czego dotyczy formuła croftona
+Pomiaru długości brzegu figury. Jest to formuła Cauchy’ego po przekształceniu.
+
+- Metody ramki bezpieczeństwa wykorzystuje się przy pomiarach: liczebności elementów.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+14. DCT JPEG
+- dwa tryby liczenia DCT w DV i kiedy który
+
+
+- kodowanie DV etapy i metody
+
+
+- Jeśli DC jest dodatni a AC są zerami to obraz będzie: czarny, w odcieniach szarości, jednolity, inny
+czarny, jednolity
+
+- Jakie cechy ludzkiego wzroku wykorzystuje JPEG (min 2.)
+mniejsza rozdzielczość widzenia kolorów niż jasności
+mała wrażliwość na amplitudę szybkich zmian jasności
+
+- Współczynniki AC i DC w DCT mogą być …
+DC - wyłącznie nieujemne,
+AC - dowolne
+
+
+- Etapy dekompresji JPEG. Zaznaczyć które to dekompresja a które to przekształcenie.
+Huffman - dekompresja
+RLE - dekompresja
+Utworzenie bloków 8x8 dla każdego z kanałów YUV - przekształcenie
+ZigZag - przekształcenie
+Dekwantyzacja na każdym bloku - dekompresja
+
+
+- Opisać etapy kompresji JPEG i każdy z nich przyporządkować do: przekształcenia, kompresji stratnej i kompresji bezstratnej
+
+RGB -> YUV - przekształcenie
+DCT - przekształcenie
+kwantyzacja - kompresja stratna
+Zig-Zag - przekształcenie
+kodowanie RLE - kompresja bezstratna
+kodowanie Huffmana - kompresja bezstratna
+
+- Wymień poziomy MPEG-2 
+wysoki, wysoki typu 1440,  główny,  niski
+
+- Wyjaśnij na czym polega kodowanie międzyramkowe sekwencji wideo, podaj przykład standardu, który wykonuje tą metodę. 
+Przy kodowaniu międzyramkowym sekwencja wizyjna składa się z ramek kluczowych zawierających pełny obraz. Pomiędzy ramkami kluczowymi znajdują się ramki delta, w których zakodowane są tylko różnice przyrostowe. Zapewnia to często znaczny stopień kompresji, ponieważ w wielu sekwencjach ruchu jedynie niewielki procent pikseli z poszczególnych ramek rzeczywiście się różni. Wykorzystuje to np. MPEG-2.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
