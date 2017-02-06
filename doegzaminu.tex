@@ -13,7 +13,7 @@
 			allcolors=black,
 			urlcolor=cyan}
 \usepackage{enumitem} % noitemsep option in lists
-\setlist{leftmargin=1.5cm}
+\setlist{leftmargin=1.5cm, noitemsep}
 \setlist[description]{labelindent=1.1cm, leftmargin=2cm}
 
 \usepackage{datetime} % Enable currenttime  command
@@ -45,7 +45,8 @@
 \pagebreak\section{Budowa oka i proces widzenia}
 
 \subsection{Metody ekstrakcji (rozpoznania) tęczówki oka}
-TODO. Aby zidentyfikować użytkownika, wykonuje się obraz tęczówki (w podczerwieni bądź świetle widzialnym), a następnie oprogramowanie usuwa z obrazu zakłócenia (np.: źrenicę, rzęsy). 
+Filtry Gabora. \\
+\includegraphics[scale=0.5]{identyfikacja_teczowki.png}
 
 \subsection{Wymień elementy oka skupiające obraz na siatkówce}
 Światło przechodzi przez rogówkę, źrenice regulowaną tęczówką – kolorową częścią oka, soczewkę, która załamuje promienie świetlne, ciało szkliste. Potem promienie padają na wewnętrzną warstwę oka – siatkówkę gdzie powstaje odwrócony obraz.
@@ -60,11 +61,19 @@ Siatkówka składa się z fotoreceptorów – czopków (odpowiedzialne za kolor)
 \pagebreak\section{Sztuczne systemy wizyjne}
 
 \subsection{Podaj min. 3 cechy naturalnego przetwarzania obrazu przewyższające sztuczne przetwarzanie obrazu}
-\begin{itemize}[noitemsep]
+\begin{itemize}
 	\item Szybka analiza złożonych obrazów
 	\item Większa skuteczność rozpoznawania obrazów dwuznacznych
 	\item Łatwe i efektywne uczenie się nowych schematów
 	\item Szybsze rozpoznawanie obrazów w czasie rzeczywistym
+\end{itemize}
+
+\subsection{Podaj min. 3 cechy przewyższające sztuczne przetwarzanie obrazu}
+\begin{itemize}
+	\item Niższa cena analizy
+	\item Szybszy czas reakcji
+	\item Powtarzalność wyników
+	\item Praca nie tylko w świetle widzialnym ale również np w podczerwieni
 \end{itemize}
 
 \subsection{Podaj dwie nowoczesne metody sztucznego przechwytywania obrazu i krótko je opisz. \\ 2 metody akwizycji obrazu w kamerach}
@@ -103,6 +112,9 @@ Siatkówka składa się z fotoreceptorów – czopków (odpowiedzialne za kolor)
 To taka przestrzeń barw, w której obszary różnicy percepcyjnej barw mają postać kul o jednakowym promieniu w obrębie całej przestrzeni barw. \par
 Przestrzeń barw CIELab i CIELUV pretendują do miana równomiernych przestrzeni barw jednak faktycznie są jej przybliżeniem. (\href{https://pl.wikipedia.org/wiki/R%C3%B3wnomierna_przestrze%C5%84_barw}{link do Wikipedii})
 	
+\subsection{Opisać CIE Lab}
+\textbf{CIELab} – przestrzeń barw, która została znormalizowana w 1976 przez CIE (Międzynarodową Komisję Oświetleniową). Barwę opisują matematycznie trzy składowe: L - jasność (luminancja), a – barwa od zielonej do magenty, b – barwa od niebieskiej do żółtej.
+	
 \subsection{Kodowanie CMYK a CMY. \\ Co to K w modelu CMY/CMYK}
 CMY(Cyan, Magenta(purpurowy), Yellow) - subtraktywny model barwny.
 Z powodu niedoskonałości tuszów stosowanych w urządzeniach do druku, dodając takie same ilości kolorów CMY, nie uzyskamy głębokiej czerni, tylko w większości przypadków kolor ciemno brązowy. Aby zlikwidować ten problem, do zestawu kolorów CMY sdecydowano dodać barwę czarną K = min(C, M, Y).\par
@@ -122,8 +134,7 @@ $\begin{bmatrix} C \\ M \\ Y \\ \end{bmatrix}
 
 \subsection{Czym jest Y w YUV.}
 Y – luminacja (dla obrazu monochromatycznego), U – składowa niebieska, V – składowa czerwona.
-\subsection{Opisać CIE Lab}
-\textbf{CIELab} – przestrzeń barw, która została znormalizowana w 1976 przez CIE (Międzynarodową Komisję Oświetleniową). Barwę opisują matematycznie trzy składowe: L - jasność (luminancja), a – barwa od zielonej do magenty, b – barwa od niebieskiej do żółtej.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak\section{Rozdzielczość i skalowanie}
 
@@ -141,11 +152,8 @@ Termin ten wskazuje, że obraz ma 720 linii poziomych. W formacie 16:9 jest to
 obraz o wymiarach 1280x720. Literka ‘p’ wskazuje, że obraz jest bez przeplotu.
 
 \subsection{Co to jest 1080i}
-Określa rozdzielczość obrazu równą 1920x1080. Literka ‘i’ wskazuje, że obraz jest
-z przeplotem (naprzemienne wyświetlanie parzystych i nieparzystych linii obrazu). \par
-Literka p - \textbf{progressive scan} czyli wyświetlane we wszystkich klatkach pełne
-obrazy. Literka i - \textbf{interlaced} czyli z przeplotem wyświetlane są pół-obrazy.
-Lepsze jest z \textbf{p}.
+Określa rozdzielczość obrazu równą 1920x1080. Literka ‘i’ wskazuje, że obraz jest z przeplotem (naprzemienne wyświetlanie parzystych i nieparzystych linii obrazu). \par
+Literka p - \textbf{progressive scan} czyli wyświetlane we wszystkich klatkach pełne obrazy. Literka i - \textbf{interlaced} czyli z przeplotem wyświetlane są pół-obrazy. Lepsze jest z \textbf{p}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak\section{Przekształcenia obrazu}
@@ -160,7 +168,7 @@ Lepsze jest z \textbf{p}.
 Operacja korzysta z gotowych tabel przekodowania look-up tables, w których dla każdej wartości piksela oryginalnego obrazu mamy gotową wartość piksela nowego obrazu.
 
 \subsection{Wybrać operacje bezkontekstowe}
-Operacje bezkontekstowe: LUT, negacja, negatyw, wyrównanie histogramu, dodawanie, odejmowanie, mnożenie, \st{filtr morfologiczny}, \st{mediana}
+Operacje bezkontekstowe: LUT, negacja, binaryzacja (globalna), wyrównanie histogramu, dodawanie, odejmowanie, mnożenie, \st{filtr morfologiczny}, \st{mediana}
 
 \subsection{Jak zrobić przekształcenie punktowe nie mając danego przepisu analitycznego}
 ???
@@ -198,6 +206,7 @@ jasność obrazu ulega zmianie. Metody, które eliminują to niekorzystne zjawis
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak\section{Binaryzacja}
+
 \subsection{Jedna metoda znajdowania progu binaryzacji + opis}
 Próg binaryzacji możemy znaleźć analizując histogram obrazu. Na ogół będziemy mieć do czynienia z dwiema “górkami” pikseli - jedna to piksele obiektu, drugie tła (jasne obiekty na ciemnym tle lub na odwrót). Próg dobieramy biorąc wartość pomiędzy nimi, w dolinie. Pozwoli to na oddzielenie obiektów od tła.
 
@@ -211,7 +220,11 @@ Progowanie z histerezą stosuje się w przypadkach, gdy klasy pikseli w histogra
 ???
 
 \subsection{Podaj przykład metody automatycznego wyznaczania progu binaryzacji. Na podstawie czego jest wyznaczany?}
-Metoda Otsu - automatycznie testuje się różne progi i szuka takiego progu, dla którego wariancja międzygrupowa będzie najwyższa a wariancja wewnątrzgrupowa będzie najniższa. Wynik uzyskujemy poprzez analizę średnich ważonych w komponentach.
+\begin{description}[noitemsep]
+	\item[Ots'u] - automatycznie testuje się różne progi i szuka takiego progu, dla którego wariancja międzygrupowa będzie najwyższa a wariancja wewnątrzgrupowa będzie najniższa. Wynik uzyskujemy poprzez analizę średnich ważonych w komponentach.
+	\item[Yen] - maksymalizacja entropii obiektów i tła
+	\item[Kittler] - podobnie jak Ots'u, tylko liczona jest dystrybuanta prawdopodobieństwa i odchylenie	standardowe
+\end{description}
 
 \subsection{Kiedy używa się binaryzacji lokalnej}
 W przypadku niejednorodnie oświetlonego obrazu.\\
@@ -228,8 +241,8 @@ Krótki opis binaryzacji lokalnej:
 Oznacza że dla wyznaczenia wartości jednego punktu obrazu wynikowego trzeba dokonać obliczenia na wielu punktach obrazu oryginalnego, z reguły na punktach sąsiednich.
 
 \subsection{Dlaczego w filtracji górnoprzepustowej nie stosuje się normalizacji tak jak w filtracji dolnoprzepustowej?}
-??? Chyba powinno być na odwrót. Normalizacja jest stosowana w filtrach górnoprzepustowych. \\
-Ponieważ w maskach filtrów górnoprzepustowych są ujemne współczynniki wag, w obrazach wynikowych wartości piksele mogą wykroczyć poza zakres 0-255. W filtrach dolnoprzepustowych takie zjawisko nie występuje bo niema ujemnych wag.
+Jeżeli chodzi o maskę: w górnoprzepustowych pomija się normalizację, czyli dzielenie przez sumę wag, bo $suma~wag = 0$. \\
+Jeżeli chodzi o wynikowy obraz: w filtracji górnoprzepustowej \st{nie} stosuje się normalizacji dlatego, że mogą tam występować ujemne współczynniki wag, stąd wartości pikseli mogą wykroczyć poza zakres 0 - 255.
 
 \subsection{Jak działa filtr medianowy? \\ Podany obraz, jak będzie wyglądał środkowy piksel po filtracji medianowej?}
 Bierze pod uwagę środkową wartość (medianę) uporządkowanych pikseli z otoczenia rozważanego piksela. Ekstremalne wartości nie wpływają na jego działanie. Bardzo skutecznie zwalcza szumy, nie powodując ich rozmazywania na większym obszarze. Nie wprowadza do obrazu nowych wartości, więc obraz po filtracji nie wymaga skalowania. Nie powoduje pogorszenia ostrości krawędzi, ale ma tendencję do zjadania narożników.
@@ -238,7 +251,7 @@ Bierze pod uwagę środkową wartość (medianę) uporządkowanych pikseli z oto
 Będą odfiltrowane zakłócenia tylko o rozmiarach 2x4 i 2x14, bo brana jest media ze wszystkich punktów otoczenia. Ilość punktów zakłócenia w oknie ma być mniejsza niż $\frac{5\times5}{2}\approx12$.
 
 \subsection{Za pomocą, których masek można otrzymać filtr kombinowany \\ Jakie gradienty można zastosować w filtrach kombinowanych \\ Jakie filtry mogą być kombinowane}
-Za pomocą dwóch prostopadłych (w różnych kierunkach) masek Sobela (Prewitta, Robertsa) i kombinacji Euklidesowej lub modułowej. Nazywane: "gradient Sobela", "gradient Prewitta", "gradient Robertsa" "gradient Kirscha" (nie był omawiany ale istnieje). \\
+Za pomocą dwóch prostopadłych (w różnych kierunkach) masek Sobela (Prewitta) i kombinacji Euklidesowej lub modułowej. Nazywane: "gradient Sobela", "gradient Prewitta", "gradient Kirscha" (nie był omawiany ale istnieje). \\
 Kombinacja Euklidesowa:
 $$ L^{\prime}(m,n) = \sqrt{(L_{1}(m,n))^2+(L_{2}(m,n))^2} $$
 Uproszczona formuła modułowa:
@@ -315,7 +328,36 @@ Racej górnoprzepustowa skoro są same krawędzie.
 
 \subsection{Różnice pomiędzy filtracją bilateralną a non local means}
 Filtracja bilateralna polega na tym, że wartość piksela zastępuje się bardzo specjalną średnią z pikseli otoczenia analizowanego piksela. Nie jest to zwykła średnia arytmetyczna, lecz średnia ważona, w której wagami są zarówno odległość piksela otoczenia od badanego piksela, ale także różnica w cechach radiometrycznych np. intensywności. W efekcie tego zachowane są ostre krawędzie. 
-Filtracja non-local means robi tak samo ale uśrednianie obejmuje wszystkie piksele w obrazie. 
+Filtracja non-local means robi tak samo ale uśrednianie obejmuje większy obszar pikseli (np. 20x20).
+
+\subsection{Jak uogólnić funkcję bilateralną dla obrazów w kolorze?}
+Odpowiednio zdefiniować odległość pomiędzy pikselami, która służy jako dodatkowa waga w uśrednianiu. 
+
+\subsection{Czym jest dekonwolucja obrazu?}
+Proces odwrotny do splotu funkcji. Polega na określeniu funkcji określającej zakłócenia w celu ich
+odfiltrowania od zarejestrowanych danych. Przykładowe metody dekonwolucji: filtr odwrotny, filtr pseudoodwrotny, filtr Wienera, niewidomej dekonwolucji.
+
+\subsection{Przykład operacji: kontekstowej liniowa, punktowej dwuargumentowej i 2x punktowa jednoargumentowa}
+\begin{description}[noitemsep]
+	\item[Kontekstowa liniowa] - filtr górnoprzepustowy
+	\item[Punktowa dwuargumentowa] - dodawanie obrazów
+	\item[Punktowe jednoargumentowe] - negacja, LUT
+\end{description}
+
+\subsection{Jaka wartosc będzie miał piksel po przefiltrowaniu medianowym z maską krzyżową (był podany wycinek obrazu)}
+Chyba chodzi o operator krzyżyowy Robertsa, czyli najpierw filtrujemy maską 
+\begin{tabular}{|c|c|}
+	\hline
+	0 & 1 \\ \hline
+	-1 & 0 \\ \hline
+\end{tabular} a potem
+\begin{tabular}{|c|c|}
+	\hline
+	1 & 0 \\ \hline
+	0 & -1 \\ \hline
+\end{tabular} i na końcu liczymy z pikseli obu wynikowych obrazów pierwiastek z sumy kwadratów (ombinacja Euklidesowa). 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak\section{Przekształcenia morfologiczne}
 
@@ -329,10 +371,10 @@ Filtr minimalny.
 E(f) < O(F) < f < Z(f) < D(f)
 
 \subsection{Co wykryje Bottom-Hat}
-Minima lokalne obrazu
+Minima lokalne obrazu (obszary lokalnie najciemniejsze)
 
 \subsection{Co wykryje Top-Hat}
-Maksima lokalne obrazu
+Maksima lokalne obrazu (obszary lokalnie najjaśniejsze)
 
 \subsection{Jak wykorzystać operacje otwarcia/zamknięcia do wyszukiwania lokalnych ekstremów}
 Maksima: Otwarcie - oryginał, binaryzacja z dolnym progiem
@@ -344,6 +386,16 @@ Minima: Zamknięcie - oryginał, binaryzacja z dolnym progiem
 \subsection{Co to jest operacja pogrubiania. Podaj przykład}
 Ścienianie obiektu X przy użyciu el. strukturalnego B polega na przyłożeniu tego elementu do każdego punktu obrazu tak, aby punkt centralny pokrywał się z tym punktem i albo nie zmieniać wartości punktu jeśli element nie pokrywa się z jego sąsiedztwem albo zmienić wartość na \textbf{1} jeśli się pokrywa. \\
 Przykład: ???
+
+\subsection{Obcinanie gałęzi}
+Polega na stopniowym redukowaniu odcinków posiadających wolne zakończenie. Można traktować jako ścienianie przy elemencie strukturalnym:
+\begin{tabular}{|c|c|c|}
+	\hline
+	0 & x & x \\ \hline
+	0 & 1 & 0 \\ \hline
+	0 & 0 & 0 \\ \hline
+\end{tabular}
+
 
 \subsection{Wypisać etapy wypełniania dziur}
 \begin{enumerate}[noitemsep]
@@ -398,11 +450,16 @@ Cykliczna dylatacja obrazu i wyznaczanie części wspólnej (operacja $AND$)z ob
 \end{tabular} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\pagebreak\section{Transformacja Houga}
+\pagebreak\section{Transformacja Hougha}
 \subsection{Jakie niepożądane efekty powstają w przekształceniu Hougha do przestrzeni A,B? Jak temu zapobiec?} ???
 Jeżeli linia jest pionowa, to wspolczynnik $a$ dochodzi do nieskończoności, co bardzo utrudnia obliczenia.
 
-%\section{Były podane dwa punkty o współrzędnych (0,0)(0,0) i (1,1)(1,1). Podaj wzór na prostą i narysuj ich interpelację w przestrzeni Hougha.}Najczęściej wykorzystywanymi parametrami są współczynniki $\sigma$, $\theta$ opisujące równanie prostej w postaci normalnej:$$ \sigma=x\cdot \cos(\theta)+y\cdot \sin(\theta) $$gdzie: $\sigma$ - promień wodzący, $\theta$ - kąt tworzony przez $\sigma$ z osią OX.
+\section{Były podane dwa punkty o współrzędnych (0,0)(0,0) i (1,1)(1,1). Podaj wzór na prostą i narysuj ich interpelację w przestrzeni Hougha.}
+Wzór na prostą:
+$$ y=a\cdot x+b $$
+$$ 0=a\cdot 0+b $$
+$$ 1=a\cdot 1+b $$
+Teraz zamieniam to na: $b = 0 (dla~kazdego~a)$ oraz $a = 1 - b$ i to są proste ilustrujące każdy z tych punktów w przestrzeni Hougha. Przecinają się w punkcie $a = 1, b = 0$ i ten punkt reprezentuje prostą łączącą te 2 punkty.
 
 \subsection{Transformata Hougha dla dwóch pikseli}
 ???
@@ -462,12 +519,54 @@ Algorytm:
 	\item W drugiej iteracji tablica sklejeń może w prosty sposób zostać użyta do przeindeksowania źle zaindeksowanych części obiektów, można ją użyć jako podstawę do operacji LUT.
 \end{enumerate}
 
-- Czego dotyczy formuła croftona
+\subsection{Czego dotyczy formuła croftona}
 Pomiaru długości brzegu figury. Jest to formuła Cauchy’ego po przekształceniu.
 
-- Metody ramki bezpieczeństwa wykorzystuje się przy pomiarach: liczebności elementów.
+\subsection{Metody ramki bezpieczeństwa wykorzystuje się przy pomiarach ...} Liczebności elementów
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-14. DCT JPEG
+\pagebreak\section{Transformata Fouriera}
+
+\subsection{Czym jest F(0,0)}
+Element o indeksach (0,0) w dziedzinie Fouriera i jest sumą wszystkich wartości dwuwymiarowego ciągu L, czyli obrazu.
+
+- Jak można wykorzystać transformatę fouriera do rozpoznawania kształtów
+
+
+- Jaki wpływ na F-obraz ma filtr Hamminga/Chebysheva/jakieś dwa inne zamiast standardowego (idealnego)?
+Od typu okna zależy różnice pomiędzy widmem sygnału obserwowanego, a widmem wyniku obserwacji.
+
+- Filtracja w dziedzinie częstotliwości
+Mnożenie całego obrazu przez maskę.
+Filtracja w dziedzinie F-obrazu może okazać się bardziej efektywna od klasycznej konwolucji (np. dla dużego obrazu z dużą maską).
+Zastosowania:
+Wykrywanie dominującej orientacji, usuwanie zakłóceń okresowych, usuwanie rozmazania wynikającego z ruchu, wyszukiwanie wzorca i korelacja
+
+- Filtracja w dziedzinie F-obrazu
+Mnożenie punktowe dwóch F-obrazów, jednego pochodzącego od filtrowanego obrazu i drugiego będącego filtrem.
+Filtracja dolnoprzepustowa: zachowuje się elementy F-obrazu w środku
+Filtracja górnoprzepustowa: zachowuje się elementy F-obrazu na zewnątrz
+Schemat:
+Wyznaczenie transformaty Fouriera obrazu
+Wymnożenie F-obrazu przez funkcję filtru
+Wyznaczenie transformaty odwrotnej
+
+- Po co się logarytmuje amplitudę w fourierze
+W celu lepszej wizualizacji(?)
+Dokładniej w celu zmniejszenia dysproporcji między składową stałą (F(0,0)), która ma wartości duże, a składowymi częstotliwościowymi, które przyjmują niewielkie wartości
+
+- Fourier splotu odpowiada czemu
+Jest to operacja równoważna filtracji w dziedzinie F przy założeniu okresowości obrazu
+
+- Czemu FFT w dwóch krokach liczyć (2x 1D)
+Ułatwia obliczenia(możemy traktować jako ciągi jednowymiarowe)
+
+- Jak się robi splot 2d
+
+
+- Po co stosuje się przesunięcie w transformacie Fouriera?
+Dla wygodniejszej analizy, wtedy niskie częstotliwości są w środku F-obrazu.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak\section{DCT JPEG}
 - dwa tryby liczenia DCT w DV i kiedy który
 
 
@@ -510,7 +609,25 @@ wysoki, wysoki typu 1440,  główny,  niski
 Przy kodowaniu międzyramkowym sekwencja wizyjna składa się z ramek kluczowych zawierających pełny obraz. Pomiędzy ramkami kluczowymi znajdują się ramki delta, w których zakodowane są tylko różnice przyrostowe. Zapewnia to często znaczny stopień kompresji, ponieważ w wielu sekwencjach ruchu jedynie niewielki procent pikseli z poszczególnych ramek rzeczywiście się różni. Wykorzystuje to np. MPEG-2.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak\section{Współczynniki ksztaultu}
+- Charakterystyki współczynników kształtu:
+Malinowskiej - średni zakres zmian wartości, im bardziej wydłużony kształt tym większa wartość, mały wpływ na obroty figury
+Blair-Bliss - mały wpływ na obroty figury, bardzo mały zakres zmian wartości
+Danielsson - duży zakres zmienności, mało odporny na zmiany skali, obroty, wysoka złożoność obliczeniowa.
+Haralick - bardzo niski przedział zmienności, brak zniekształcenia przez obrót/zmianę skali
+LP1 - charakteryzuje cechy pośrednie, dobrze oddaje cyrkularność obiektu, bada zmienność min i max odległości środka ciężkości od konturu, dla koła wartość 1
+LP2 - stosunek max gabarytu do obwodu obiektu, mała wartość dla figur o poszarpanym brzegu, dobrze oddaje wydłużenie obiektu
+Feret - mała wartość dla wydłużonych, duża zmienność, łatwo policzyć, podatny na zmianę skali
+
+- Podać 4 “elementy”, które wykorzystuje się przy obliczaniu współczynników kształtu.
+Pole powierzchni, Obwód obiektu, środek ciężkości, średnica obiektu
+
+- Czym powinny charakteryzować się współczynniki kształtu
+Powinny dobrze różnicować obiekty o różnych kształtach,
+być niezmiennicze ze względu na typowe przekształcenia, takie jak obroty, przesunięcia
+
+- Kwadrat i Prostokąt. Dla którego będzie mniejszy współ. Malinowskiej.
+Kwadrat, bo współczynnik Malinowskiej przyjmuje większe wartości dla wydłużonych kształtów.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
